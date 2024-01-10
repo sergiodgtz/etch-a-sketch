@@ -7,6 +7,7 @@ let modificarGrid = false;
 let rawText = "";
 let txtGridSize;
 let divs;
+let container = document.querySelector('#containerMain');
 
 createDivs(16, 16);
 
@@ -17,7 +18,9 @@ function random_rgba() {
 
 function createDivs(height, width){
 
-    
+    var rowHeight = Math.round(800 / height);
+    var columnwidth = Math.round(800/ width);
+
 
     document.querySelectorAll('.container').forEach(element => {
         element.remove();
@@ -28,7 +31,7 @@ function createDivs(height, width){
 
         tmpdiv = document.createElement('div');
         tmpdiv.classList.add('container');
-        document.body.appendChild(tmpdiv);
+        container.appendChild(tmpdiv);
         
         for (let j=0; j < width; j++){
 
@@ -47,6 +50,31 @@ function createDivs(height, width){
         d.addEventListener('mouseover', changeColor);
 
     });
+
+    changesize(rowHeight, columnwidth);
+
+}
+
+function changesize(rowHeight, columnwidth){
+
+    let divs = document.querySelectorAll('.container');
+    let cadenaAltura = rowHeight.toString() + 'px';
+
+    divs.forEach(d => {
+
+        d.style.minHeight = cadenaAltura;
+        d.style.width = '800px'; 
+    })
+
+    let innerDivs = document.querySelectorAll('.borderDiv');
+
+    innerDivs.forEach(d => {
+
+        d.style.minHeight = rowHeight.toString() + 'px'; 
+        d.style.minWidth = columnwidth.toString() + 'px';
+
+    })
+
 }
 
 function changeColor(event)
